@@ -40,8 +40,8 @@ jobs:
       shell: bash
       run: cmake --install build --config Release
     
-    - name: Upload Artifacts
-      uses: actions/upload-artifact@v3
-      with:
-       name: ${{ matrix.platform.name }} ${{ matrix.config.name }}
-       path: ./build
+  #  - name: Upload Artifacts
+    #  uses: actions/upload-artifact@v3
+     # with:
+      # name: ${{ matrix.platform.name }} ${{ matrix.config.name }}
+    #   path: ./build
