@@ -2,10 +2,10 @@ cmake_minimum_required(VERSION 3.21)
 project(EniPattern LANGUAGES CXX)
 
 include(FetchContent)
-set(SFML_BUILD_NETWORK OFF)
 FetchContent_Declare(SFML
-    GIT_REPOSITORY https://github.com/SFML/SFML.git
-    GIT_TAG 2.6.x)
+    GIT_REPOSITORY https://github.com/SFML/SFML
+    GIT_TAG <whatever you want goes here>
+    EXCLUDE_FROM_ALL SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
 add_executable(EniPattern src/Main.cpp)
