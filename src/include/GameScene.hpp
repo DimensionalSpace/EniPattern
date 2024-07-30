@@ -2,7 +2,6 @@
 #include <SFML/Graphics.hpp>
 #include "./Scene.hpp"
 #include "TilemapImporter.hpp"
-#include "Player.hpp"
 #include "Goal.hpp"
 #include "PushableItem.hpp"
 #include "Teleporter.hpp"
