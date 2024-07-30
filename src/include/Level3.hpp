@@ -1,6 +1,6 @@
 #pragma once
 #include "TilemapImporter.hpp"
-#include "Player.hpp"
+
 #include "Goal.hpp"
 #include "PushableItem.hpp"
 #include "Teleporter.hpp"
