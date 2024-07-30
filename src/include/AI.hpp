@@ -82,7 +82,7 @@ void AI::update(float deltatime, RenderWindow& window)
                 sf::Vector2f movementDirection = vectorToTarget / distanceToTarget;
                 body.move(movementDirection * movementSpeed);
             }
-            if( body.getPosition().y > vectorToTarget.y or vectorToTarget.x > vectorToTarget.y ){
+            if( body.getPosition().y > vectorToTarget.y || vectorToTarget.x > vectorToTarget.y ){
                 setani = 0;
             }else{
                 setani = 1;
