@@ -4,7 +4,6 @@
 #include <math.h>
 #include "AI.hpp"
 #include "Door.hpp"
-#include "Player.hpp"
 #include "Animation.hpp"
 #include <iostream>
 using namespace sf;
