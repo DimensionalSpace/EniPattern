@@ -11,7 +11,7 @@ FetchContent_Declare(SFML
 FetchContent_MakeAvailable(SFML)
 
 add_executable(EniPattern src/Main.cpp)
-target_link_libraries(EniPattern PRIVATE sfml-graphics)
+target_link_libraries(EniPattern PRIVATE sfml-graphics sfml-audio)
 target_compile_features(EniPattern PRIVATE cxx_std_17)
 
 if(WIN32)
