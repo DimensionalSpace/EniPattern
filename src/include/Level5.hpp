@@ -19,7 +19,7 @@ class Level5: public Scene
 private:
 GameData gamedata;
 DataLoader dl;
-    TilemapImporter tmpimp = TilemapImporter("level5.json", "Textures/tilemap1.png");
+    TilemapImporter tmpimp = TilemapImporter("./Levels/level5.json", "Textures/tilemap1.png", {64*32, 64*32}, {32, 32}, {256, 256});
     AI ai = AI("Textures/Char/6.png", {27*32,9*32},2.5f, 32, 32, {4,3}, 0.2f, 6);
     
     vector<AI> ais = {ai};

@@ -21,9 +21,10 @@ private:
     int y = 0;
     int x = 0;
     json level;
+    Vector2i Tilesize, Tilemapsize;
     array<Texture, 128> maptextures;
 public:
-    TilemapImporter(const string& filename, const string& textureFile);
+    TilemapImporter(const string& filename, const string& textureFile, Vector2i tilemapsize, Vector2i tilesize, Vector2i texturedim);
     ~TilemapImporter();
     
     vector<Sprite> tileMapSprites(){
@@ -33,13 +34,13 @@ public:
         for(const auto& element : level["layers"][0]["data"]){
             int value = element.get<int>();
         
-            if(posx == 2048){
+            if(posx == Tilemapsize.x){
                     posx = 0;
-                    posy += 32;
+                    posy += Tilesize.y;
                 
             }
             if(value == 0){
-                posx += 32;
+                posx += Tilesize.x;
             }
             if(value != 0){
                 Sprite tile;
@@ -49,7 +50,7 @@ public:
                 tile.setPosition(Vector2f(posx, posy));
             
                 tilemap.push_back(tile);
-                posx += 32;  
+                posx += Tilesize.x;  
             }
         }
         return tilemap;
@@ -71,13 +72,13 @@ public:
         for(const auto& element : level["layers"][2]["data"]){
             int value = element.get<int>();
         
-            if(posx == 2048){
+            if(posx == Tilemapsize.x){
                     posx = 0;
-                    posy += 32;
+                    posy += Tilesize.y;
                 
             }
             if(value == 0){
-                posx += 32;
+                posx += Tilesize.x;
             }
             if(value != 0){
                 Sprite tile;
@@ -87,29 +88,59 @@ public:
                 tile.setPosition(Vector2f(posx, posy));
             
                 tilemap.push_back(tile);
-                posx += 32;  
-                cout << tile.getPosition().x<<" "<< tile.getPosition().y;
+                posx += Tilesize.x;  
+               
             }
         }
         return tilemap;
     }
-   
+     vector<AI> AIs(){
+        vector<AI> tilemap;
+        int posx = 0;
+        int posy = 0;
+        for(const auto& element : level["layers"][3]["data"]){
+            int value = element.get<int>();
+        
+            if(posx == Tilemapsize.x){
+                    posx = 0;
+                    posy += Tilesize.y;
+                
+            }
+            if(value == 0){
+                posx += Tilesize.x;
+            }
+            if(value != 0){
+                int num = value - 10;
+                string dir = "Textures/Char/" + to_string(num) + ".png";
+                AI ai = AI(dir, {posx,posy},2.5f, 32, 32, {4,3}, 0.2f, num);
+                ai.body.setScale(3,3);
+                
+            
+                tilemap.push_back(ai);
+                posx += Tilesize.x;  
+            }
+        }
+        return tilemap;
+    }
 
     
 
 };
 
-TilemapImporter::TilemapImporter(const string& filename, const string& textureFile)
+TilemapImporter::TilemapImporter(const string& filename, const string& textureFile, Vector2i tilemapsize, Vector2i tilesize, Vector2i texturedim)
 {
+    Tilemapsize = tilemapsize;
+    Tilesize = tilesize;
+    
     ifstream f(filename);
     level = json::parse(f);
     for(int i = 0; i < maptextures.size(); i++){
          
-       maptextures[i].loadFromFile(textureFile, IntRect(x,y,32,32));
-        x += 32;
-        if(x==256){
+       maptextures[i].loadFromFile(textureFile, IntRect(x,y,tilesize.x,tilesize.y));
+        x += tilesize.x;
+        if(x==texturedim.x){
             x=0;
-            y+=32;
+            y+=tilesize.y;
         }
         
     }

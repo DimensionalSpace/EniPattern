@@ -20,7 +20,7 @@ class Level3: public Scene
 private:
 GameData gamedata;
 DataLoader dl;
-    TilemapImporter tmpimp = TilemapImporter("level3.json", "Textures/tilemap1.png");
+    TilemapImporter tmpimp = TilemapImporter("./Levels/level3.json", "Textures/tilemap1.png", {64*32, 64*32}, {32, 32}, {256, 256});
     AI ai = AI("Textures/Char/3.png", {400,200},2.5f, 32, 32, {4,3}, 0.2f, 3);
     vector<AI> ais = {ai};
     vector<Wall> walls;

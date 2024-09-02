@@ -4,7 +4,7 @@
   <export target="../level1.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="tilemap1" tilewidth="32" tileheight="32" tilecount="32" columns="8">
-  <image source="tilemap1.png" width="256" height="128"/>
+  <image source="../Textures/tilemap1.png" width="256" height="128"/>
  </tileset>
  <layer id="1" name="LevelLayer" width="64" height="64">
   <data encoding="csv">

@@ -29,7 +29,7 @@ private:
         Selection sel;
         
         AI ai = AI("Textures/Char/2.png", {200,200},2.5f, 32, 32, {4,3}, 0.2f, 0);
-        TilemapImporter tilemapImporter = TilemapImporter("./level1.json", "Textures/tilemap1.png");
+        TilemapImporter tilemapImporter = TilemapImporter("./Levels/level1.json", "Textures/tilemap1.png", {64*32, 64*32}, {32, 32}, {256, 256});
         Goal g = Goal("Textures/1.png", {57, 1000}, 0);
         Door door = Door("Textures/3.png", false, {100, 4});
         vector<Door> doors = {door};
@@ -86,7 +86,7 @@ public:
     };
     void Update(sf::RenderWindow& window) override{
         cout << door.Wallbox.getPosition().x << " " << door.Wallbox.getPosition().y << endl;
-  cout << door.Wallbox.getGlobalBounds().getPosition().x << " " << door.Wallbox.getGlobalBounds().getPosition().y << endl;
+  
         float deltaTime = clock.restart().asSeconds();
         for(auto& e : pis){
              e.handleCollisions(walls, doors, ais);
