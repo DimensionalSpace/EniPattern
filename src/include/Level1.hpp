@@ -18,11 +18,11 @@ private:
 GameData gamedata;
 DataLoader dl;
     TilemapImporter tmpimp = TilemapImporter("./Levels/level1new.json", "Textures/tilemap1.png", {64*32, 64*32}, {32, 32}, {256, 256});
-    AI ai = AI("Textures/Char/2.png", {100,100},2.5f, 32, 32, {4,3}, 0.2f, 2);
-    vector<AI> ais = {ai};
+  //  AI ai = AI("Textures/Char/2.png", {100,100},2.5f, 32, 32, {4,3}, 0.2f, 2);
+    vector<AI> ais; //= {ai};
     vector<Wall> walls;
     vector<Sprite> bottom;
-    Goal g = Goal("Textures/Goal.png", {21*32, 24*32}, 2); 
+    Goal g = Goal( {21*32, 24*32}, 2); 
     vector<Goal> goals = {g};
     vector<Door> doors;
     vector<PushButton> buttons;
@@ -61,8 +61,9 @@ void Level1::Code(sf::RenderWindow& window){
     bottom = tmpimp.tileMapSprites();
     top = tmpimp.TopLayer();
     walls = tmpimp.TilemapWalls();
+    ais = tmpimp.AIs();
     for(auto& a : ais){
-      a.body.setScale(3,3);
+      a.settexture();
     }
       camera.setSize(Vector2f(window.getSize()));
     camera.setCenter(window.getSize().x / 2, window.getSize().y / 2);  
@@ -82,10 +83,10 @@ void Level1::Update(sf::RenderWindow &window)
    sf::Vector2i mousePos = sf::Mouse::getPosition(window);
       sf::Vector2f mousePosF = window.mapPixelToCoords(mousePos);
   float deltaTime = clock.restart().asSeconds();
-  for(auto& er : ais){
-            er.update(deltaTime, window);
-         er.SetSelected(sel);
-         er.handleWallCollisions(walls, doors);
+  for(auto& ai : ais){
+            ai.update(deltaTime, window);
+         ai.SetSelected(sel);
+         ai.handleWallCollisions(walls, doors);
          }
     for (Goal& goal : goals)
     {

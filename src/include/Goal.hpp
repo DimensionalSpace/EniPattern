@@ -14,7 +14,7 @@ private:
     
 public:
 bool finishedpattern = false;
-    Goal(const string& filename, Vector2f position, int pattern);
+    Goal( Vector2f position, int pattern);
     ~Goal();
     void Draw(RenderWindow& window){
         window.draw(body);
@@ -22,9 +22,9 @@ bool finishedpattern = false;
     void HandleCollisions( std::vector<AI>& ai);
 };
 
-Goal::Goal(const string& filename, Vector2f position, int pattern)
+Goal::Goal( Vector2f position, int pattern)
 {
-    tex.loadFromFile(filename);
+    tex.loadFromFile("Textures/Goal.png");
     body.setPosition(position);
     body.setTexture(tex);
     patterntype = pattern;

@@ -28,9 +28,9 @@ private:
         sf::Clock clock;
         Selection sel;
         
-        AI ai = AI("Textures/Char/2.png", {200,200},2.5f, 32, 32, {4,3}, 0.2f, 0);
+        AI ai = AI({200,200},2.5f, 32, 32, {4,3}, 0.2f, 0);
         TilemapImporter tilemapImporter = TilemapImporter("./Levels/level1.json", "Textures/tilemap1.png", {64*32, 64*32}, {32, 32}, {256, 256});
-        Goal g = Goal("Textures/1.png", {57, 1000}, 0);
+        Goal g = Goal( {57, 1000}, 0);
         Door door = Door("Textures/3.png", false, {100, 4});
         vector<Door> doors = {door};
         PushButton p = PushButton("Textures/3.png", {678, 5}, true);
@@ -117,7 +117,7 @@ public:
        
         Wall floor(Vector2f(200, 200), Color::White);
         Wall ceiling(Vector2f(200, 100), Color::White);
-       
+       ai.settexture();
       
         
 

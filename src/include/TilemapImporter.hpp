@@ -12,6 +12,7 @@
 #include "AI.hpp"
 #include "Door.hpp"
 #include "Goal.hpp"
+#include "stdio.h"
 using json = nlohmann::json;
 using namespace sf;
 using namespace std;
@@ -29,8 +30,8 @@ public:
     
     vector<Sprite> tileMapSprites(){
         vector<Sprite> tilemap;
-        int posx = 0;
-        int posy = 0;
+        float posx = 0;
+        float posy = 0;
         for(const auto& element : level["layers"][0]["data"]){
             int value = element.get<int>();
         
@@ -67,8 +68,8 @@ public:
     };
     vector<Sprite> TopLayer(){
        vector<Sprite> tilemap;
-        int posx = 0;
-        int posy = 0;
+        float posx = 0;
+        float posy = 0;
         for(const auto& element : level["layers"][2]["data"]){
             int value = element.get<int>();
         
@@ -94,34 +95,37 @@ public:
         }
         return tilemap;
     }
-     vector<AI> AIs(){
-        vector<AI> tilemap;
-        int posx = 0;
-        int posy = 0;
-        for(const auto& element : level["layers"][3]["data"]){
-            int value = element.get<int>();
+   vector<AI> AIs(){
+    vector<AI> tilemap;
+    float posx = 0;
+    float posy = 0;
+    for(const auto& element : level["layers"][3]["data"]){
+        int value = element.get<int>();
         
-            if(posx == Tilemapsize.x){
-                    posx = 0;
-                    posy += Tilesize.y;
-                
-            }
-            if(value == 0){
-                posx += Tilesize.x;
-            }
-            if(value != 0){
-                int num = value - 10;
-                string dir = "Textures/Char/" + to_string(num) + ".png";
-                AI ai = AI(dir, {posx,posy},2.5f, 32, 32, {4,3}, 0.2f, num);
-                ai.body.setScale(3,3);
-                
-            
-                tilemap.push_back(ai);
-                posx += Tilesize.x;  
-            }
+        if(posx == Tilemapsize.x){
+            posx = 0;
+            posy += Tilesize.y;
         }
-        return tilemap;
+
+        if(value == 0){
+            posx += Tilesize.x;
+        } else {
+            int num = value - 10;
+            
+            
+
+            AI ai({posx,posy}, 2.5f, 32, 32, {4,3}, 0.2f, num);
+            ai.settexture();
+            ai.body.setScale(3,3);
+            
+           // ai.t = t; // Store the texture in AI to keep it alive
+            
+            tilemap.push_back(ai);
+            posx += Tilesize.x;
+        }
     }
+    return tilemap;
+}
 
     
 

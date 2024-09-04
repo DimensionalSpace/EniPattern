@@ -20,13 +20,13 @@ private:
 GameData gamedata;
 DataLoader dl;
     TilemapImporter tmpimp = TilemapImporter("./Levels/level4.json", "Textures/tilemap1.png", {64*32, 64*32}, {32, 32}, {256, 256});
-    AI ai = AI("Textures/Char/5.png", {4*32,4*32},2.5f, 32, 32, {4,3}, 0.2f, 5);
-    AI ai2 = AI("Textures/Char/4.png", {17*32,18*32},2.5f, 32, 32, {4,3}, 0.2f, 4);
-    vector<AI> ais = {ai, ai2};
+    AI ai = AI({4*32,4*32},2.5f, 32, 32, {4,3}, 0.2f, 5);
+    AI ai2 = AI( {17*32,18*32},2.5f, 32, 32, {4,3}, 0.2f, 4);
+    vector<AI> ais;
     vector<Wall> walls;
     vector<Sprite> bottom;
-    Goal g = Goal("Textures/Goal.png", {1*32, 13*32}, 5); 
-    Goal g2 = Goal("Textures/Goal.png", {17*32, 25*32}, 4); 
+    Goal g = Goal( {1*32, 13*32}, 5); 
+    Goal g2 = Goal( {17*32, 25*32}, 4); 
     vector<Goal> goals = {g,g2};
     Door door = Door("Textures/slidedoor1.png", true, {17*32, 23*32});
     
@@ -72,6 +72,9 @@ void Level4::Code(sf::RenderWindow& window){
     bottom = tmpimp.tileMapSprites();
     top = tmpimp.TopLayer();
     walls = tmpimp.TilemapWalls();
+    ai.settexture();
+    ai2.settexture();
+    ais = {ai, ai2};
     for(auto& a : ais){
       a.body.setScale(3,3);
     }

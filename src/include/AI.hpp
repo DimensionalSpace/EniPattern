@@ -21,20 +21,24 @@ private:
     
     
 public:
+    
     std::optional<sf::Vector2f> target;
     int patterntype;
     sf::Sprite body;
     bool view = true;
-    AI(const string& filename, Vector2f position, float movementspeed, int width, int height,sf::Vector2u imageCount,float switchTime, int pattern):
+    AI(Vector2f position, float movementspeed, int width, int height,sf::Vector2u imageCount,float switchTime, int pattern):
     animation(imageCount, switchTime, 10, 17){
-        t.loadFromFile(filename);
-        body.setTexture(t);
         body.setPosition(position);
         movementSpeed = movementspeed;
         patterntype = pattern;
-        
+       
       
     };
+    void settexture(){
+         
+        t.loadFromFile("Textures/Char/" + to_string(patterntype) + ".png");
+        body.setTexture(t);
+    }
     void update(float deltatime,sf::RenderWindow& window);
     void SetSelected(Selection sel){
         if(body.getGlobalBounds().intersects(sel.getglobalbounds()))
@@ -43,6 +47,7 @@ public:
             Selected = false;
         }
     };
+  
     void Draw(sf::RenderWindow& window){
         if(view){
             window.draw(body);

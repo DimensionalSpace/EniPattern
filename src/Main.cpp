@@ -29,20 +29,11 @@ using namespace sf;
    
 int main()
 {
-    LevelSelection levsel;
-    Level1 l1;
-  Level2 l2;
-  Level3 l3;
-  Level4 l4;
-  Level5 l5;
-    MainMenu mainscene;
-    SettingsMenu settingsmenu;
-    SoundSettingsMenu ksm;
-    DisplaySettingsMenu dsm;
+    
     DisplaySettings ds;
     DataLoader dataloader;
     dataloader.LoadDisplaySettings("displaysettings",ds);
-    Scene* scenes[] = {&mainscene,&settingsmenu,&ksm,&dsm,&levsel,&l1, &l2, &l3 ,&l4, &l5};
+    vector<Scene*> scenes = {new MainMenu(),new SettingsMenu(),new SoundSettingsMenu(),new DisplaySettingsMenu(),new LevelSelection(),new Level1(), new Level2(), new Level3() ,new Level4(), new Level5()};
     Scene *scene = scenes[scene->index];
     
     
@@ -71,6 +62,10 @@ int main()
                 window.close();
             }
             if(scene->cs == true){
+                
+                
+                
+                
                 scene->Code(window);
                 scene->cs = false;
             }

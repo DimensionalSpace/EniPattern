@@ -20,12 +20,12 @@ private:
 GameData gamedata;
 DataLoader dl;
     TilemapImporter tmpimp = TilemapImporter("./Levels/level5.json", "Textures/tilemap1.png", {64*32, 64*32}, {32, 32}, {256, 256});
-    AI ai = AI("Textures/Char/6.png", {27*32,9*32},2.5f, 32, 32, {4,3}, 0.2f, 6);
+    AI ai = AI( {27*32,9*32},2.5f, 32, 32, {4,3}, 0.2f, 6);
     
-    vector<AI> ais = {ai};
+    vector<AI> ais;
     vector<Wall> walls;
     vector<Sprite> bottom;
-    Goal g = Goal("Textures/Goal.png", {24*32, 23*32}, 6); 
+    Goal g = Goal( {24*32, 23*32}, 6); 
     
     vector<Goal> goals = {g};
     Door door = Door("Textures/slidedoor1.png", true, {24*32, 21*32});
@@ -74,6 +74,8 @@ void Level5::Code(sf::RenderWindow& window){
     bottom = tmpimp.tileMapSprites();
     top = tmpimp.TopLayer();
     walls = tmpimp.TilemapWalls();
+    ai.settexture();
+    ais = {ai};
     for(auto& a : ais){
       a.body.setScale(3,3);
     }
