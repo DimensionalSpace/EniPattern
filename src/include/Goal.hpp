@@ -19,14 +19,18 @@ bool finishedpattern = false;
     void Draw(RenderWindow& window){
         window.draw(body);
     }
+    void SetTexture(){
+        tex.loadFromFile("Textures/Goal.png");
+        body.setTexture(tex);
+    }
     void HandleCollisions( std::vector<AI>& ai);
 };
 
 Goal::Goal( Vector2f position, int pattern)
 {
-    tex.loadFromFile("Textures/Goal.png");
+    
     body.setPosition(position);
-    body.setTexture(tex);
+    
     patterntype = pattern;
      body.setTextureRect({0,0,32,32});
 }

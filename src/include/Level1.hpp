@@ -22,8 +22,8 @@ DataLoader dl;
     vector<AI> ais; //= {ai};
     vector<Wall> walls;
     vector<Sprite> bottom;
-    Goal g = Goal( {21*32, 24*32}, 2); 
-    vector<Goal> goals = {g};
+   // Goal g = Goal( {21*32, 24*32}, 2); 
+    vector<Goal> goals;
     vector<Door> doors;
     vector<PushButton> buttons;
     vector<Teleporter> teleporters;
@@ -62,8 +62,12 @@ void Level1::Code(sf::RenderWindow& window){
     top = tmpimp.TopLayer();
     walls = tmpimp.TilemapWalls();
     ais = tmpimp.AIs();
+    goals = tmpimp.Goals();
     for(auto& a : ais){
       a.settexture();
+    }
+    for(auto& g : goals){
+      g.SetTexture();
     }
       camera.setSize(Vector2f(window.getSize()));
     camera.setCenter(window.getSize().x / 2, window.getSize().y / 2);  

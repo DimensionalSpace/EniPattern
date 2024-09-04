@@ -126,7 +126,35 @@ public:
     }
     return tilemap;
 }
+  vector<Goal> Goals(){
+    vector<Goal> tilemap;
+    float posx = 0;
+    float posy = 0;
+    for(const auto& element : level["layers"][4]["data"]){
+        int value = element.get<int>();
+        
+        if(posx == Tilemapsize.x){
+            posx = 0;
+            posy += Tilesize.y;
+        }
 
+        if(value == 0){
+            posx += Tilesize.x;
+        } else {
+            int num = value - 16;
+            printf(to_string(num).c_str());
+            
+
+            Goal g = Goal( {posx, posy}, num);
+            
+           // ai.t = t; // Store the texture in AI to keep it alive
+            
+            tilemap.push_back(g);
+            posx += Tilesize.x;
+        }
+    }
+    return tilemap;
+}
     
 
 };
