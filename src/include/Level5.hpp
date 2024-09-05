@@ -39,7 +39,7 @@ DataLoader dl;
      Teleporter tp = Teleporter("Textures/teleporter.png", {21*32, 9*32}, {6*32,7*32});
     Teleporter tp2 = Teleporter("Textures/teleporter.png", {8*32, 12*32}, {7*32,18*32});
     Teleporter tp3 = Teleporter("Textures/teleporter.png", {10*32, 19*32}, {25*32,18*32});
-     PushableItem item2 = PushableItem("Textures/Vase.png", {23*32, 9*32}); 
+     PushableItem item2 = PushableItem( {23*32, 9*32}, 2); 
     vector<PushableItem> items = { item2};
     sf::Clock clock;
     vector<Sprite>  top;

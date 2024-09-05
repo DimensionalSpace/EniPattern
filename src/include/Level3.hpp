@@ -21,12 +21,12 @@ private:
 GameData gamedata;
 DataLoader dl;
     TilemapImporter tmpimp = TilemapImporter("./Levels/level3.json", "Textures/tilemap1.png", {64*32, 64*32}, {32, 32}, {256, 256});
-    AI ai = AI( {400,200},2.5f, 32, 32, {4,3}, 0.2f, 3);
+   // AI ai = AI( {400,200},2.5f, 32, 32, {4,3}, 0.2f, 3);
     vector<AI> ais;
     vector<Wall> walls;
     vector<Sprite> bottom;
-    Goal g = Goal({19*32, 24*32}, 3); 
-    vector<Goal> goals = {g};
+  //  Goal g = Goal({19*32, 24*32}, 3); 
+    vector<Goal> goals;
     Door door = Door("Textures/slidedoor1.png", true, {19*32, 14*32});
     Door door2 = Door("Textures/slidedoor1.png", true, {19*32, 18*32});
     vector<Door> doors = {door, door2};
@@ -36,8 +36,8 @@ DataLoader dl;
     
     vector<Teleporter> teleporters;
     
-     PushableItem item2 = PushableItem("Textures/Vase.png", {20*32, 5*32}); 
-    vector<PushableItem> items = { item2};
+   //  PushableItem item2 = PushableItem( {20*32, 5*32}, 2); 
+    vector<PushableItem> items;
     sf::Clock clock;
     vector<Sprite>  top;
     Selection sel;
@@ -71,10 +71,17 @@ void Level3::Code(sf::RenderWindow& window){
     bottom = tmpimp.tileMapSprites();
     top = tmpimp.TopLayer();
     walls = tmpimp.TilemapWalls();
-    ai.settexture();
-    ais = {ai};
+    goals = tmpimp.Goals();
+    items = tmpimp.PushableItems();
+    ais = tmpimp.AIs();
     for(auto& a : ais){
-      a.body.setScale(3,3);
+      a.settexture();
+    }
+    for(auto& g : goals){
+      g.SetTexture();
+    }
+    for(auto& pi : items){
+      pi.SetTexture();
     }
       camera.setSize(Vector2f(window.getSize()));
     camera.setCenter(window.getSize().x / 2, window.getSize().y / 2);  
@@ -113,7 +120,10 @@ void Level3::Update(sf::RenderWindow &window)
        doors[1].update(p2.pressed, 15*32, 18*32);
       
       
-     items[0].handleCollisions(walls, doors, ais);
+     for(auto& i : items){
+      i.handleCollisions(walls, doors, ais);
+     }
+
       
     
      

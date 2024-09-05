@@ -36,7 +36,7 @@ private:
         PushButton p = PushButton("Textures/3.png", {678, 5}, true);
        vector<AI> ais = {ai};
 
-       PushableItem pi = PushableItem("Textures/4.png", {100, 50});
+       PushableItem pi = PushableItem( {100, 50},2);
        vector<PushableItem> pis = {pi};
         Teleporter tp = Teleporter("Textures/6.png", {630, 40}, {0,0});
 public:
@@ -79,7 +79,7 @@ public:
          
             door.drawTo(window);
          
-      
+       pi.SetTexture();
         g.Draw(window);
       sel.Draw(window);
        

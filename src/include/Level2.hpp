@@ -20,12 +20,12 @@ private:
 GameData gamedata;
 DataLoader dl;
     TilemapImporter tmpimp = TilemapImporter("./Levels/level2.json", "Textures/tilemap1.png", {64*32, 64*32}, {32, 32}, {256, 256});
-    AI ai = AI({100,100},2.5f, 32, 32, {4,3}, 0.2f, 1);
+ //   AI ai = AI({100,100},2.5f, 32, 32, {4,3}, 0.2f, 1);
     vector<AI> ais;
     vector<Wall> walls;
     vector<Sprite> bottom;
-    Goal g = Goal( {18*32, 24*32}, 1); 
-    vector<Goal> goals = {g};
+    //Goal g = Goal( {18*32, 24*32}, 1); 
+    vector<Goal> goals;
     Door door = Door("Textures/slidedoor1.png", true, {18*32, 18*32});
     vector<Door> doors = {door};
      PushButton p = PushButton("Textures/PushButton.png", {14*32, 10*32}, true);
@@ -65,10 +65,13 @@ void Level2::Code(sf::RenderWindow& window){
     bottom = tmpimp.tileMapSprites();
     top = tmpimp.TopLayer();
     walls = tmpimp.TilemapWalls();
-    ai.settexture();
-    ais = {ai};
+    ais = tmpimp.AIs(); 
+    goals = tmpimp.Goals();
     for(auto& a : ais){
-      a.body.setScale(3,3);
+      a.settexture();
+    }
+    for(auto& g : goals){
+      g.SetTexture();
     }
       camera.setSize(Vector2f(window.getSize()));
     camera.setCenter(window.getSize().x / 2, window.getSize().y / 2);  

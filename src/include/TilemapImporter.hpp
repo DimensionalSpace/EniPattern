@@ -13,6 +13,7 @@
 #include "Door.hpp"
 #include "Goal.hpp"
 #include "stdio.h"
+#include "PushableItem.hpp"
 using json = nlohmann::json;
 using namespace sf;
 using namespace std;
@@ -155,7 +156,35 @@ public:
     }
     return tilemap;
 }
-    
+vector<PushableItem> PushableItems(){
+    vector<PushableItem> tilemap;
+    float posx = 0;
+    float posy = 0;
+    for(const auto& element : level["layers"][5]["data"]){
+        int value = element.get<int>();
+        
+        if(posx == Tilemapsize.x){
+            posx = 0;
+            posy += Tilesize.y;
+        }
+
+        if(value == 0){
+            posx += Tilesize.x;
+        } else {
+            int num = value - 30;
+            printf(to_string(num).c_str());
+            
+
+            PushableItem item =  PushableItem( {20*32, 5*32}, num); 
+            
+           // ai.t = t; // Store the texture in AI to keep it alive
+            
+            tilemap.push_back(item);
+            posx += Tilesize.x;
+        }
+    }
+    return tilemap;
+}    
 
 };
 

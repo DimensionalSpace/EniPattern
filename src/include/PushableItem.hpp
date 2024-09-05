@@ -12,28 +12,27 @@ class PushableItem{
 
 
 private:
-   
-     
     Texture t;
-    
-   
-    
-   
-    
     
 public:
  Sprite character;
+ int itemtype;
  FloatRect bounds = character.getGlobalBounds();
-    PushableItem(const string& filename, Vector2f position)
- {
-        t.loadFromFile(filename);
-        
-        character.setTexture(t);
+    PushableItem( Vector2f position, int pushableitemtype)
+ {      
+        itemtype = pushableitemtype;
+      
         character.setPosition(position);
         
       
        
     };
+    void SetTexture(){
+        if(itemtype)
+        t.loadFromFile("Textures/PushableItems/" + to_string(itemtype) + ".png");
+        
+        character.setTexture(t);
+    }
     void Draw(RenderWindow& window){
         window.draw(character);
     }
