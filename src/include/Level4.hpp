@@ -190,9 +190,8 @@ void Level4::Render(sf::RenderWindow &window)
    
    
      sel.Draw(window);
-      for (Goal& goal : goals){
-    if(goal.finishedpattern == true){
-        nextlevel.Draw(window);
-      }}
+    if (std::all_of(goals.begin(), goals.end(), [](const Goal& goal) { return goal.finishedpattern; })) {
+    nextlevel.Draw(window);
+    }
      
 }
