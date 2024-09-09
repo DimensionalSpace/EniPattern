@@ -28,7 +28,7 @@ DataLoader dl;
     Goal g = Goal( {24*32, 23*32}, 6); 
     
     vector<Goal> goals = {g};
-    Door door = Door("Textures/slidedoor1.png", true, {24*32, 21*32});
+    Door door = Door(1, true, {24*32, 21*32});
     
     vector<Door> doors = {door};
     
@@ -115,7 +115,7 @@ void Level5::Update(sf::RenderWindow &window)
       
       }
     
-       doors[0].update(p2.pressed, 22*32,24*32);
+       doors[0].update(p2.pressed);
       
       
       

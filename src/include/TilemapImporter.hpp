@@ -185,6 +185,40 @@ vector<PushableItem> PushableItems(){
     }
     return tilemap;
 }    
+vector<Door> Doors(){
+    vector<Door> tilemap;
+    float posx = 0;
+    float posy = 0;
+    for(const auto& element : level["layers"][6]["data"]){
+        int value = element.get<int>();
+        
+        if(posx == Tilemapsize.x){
+            posx = 0;
+            posy += Tilesize.y;
+        }
+
+        if(value == 0){
+            posx += Tilesize.x;
+        } else {
+             bool horizontal;
+            if(value == 25){
+               horizontal = true;
+            }else if (value == 26){
+                horizontal = false;
+            }
+            Door door = Door(1, horizontal, {posx, posy});
+            
+
+             
+            
+           // ai.t = t; // Store the texture in AI to keep it alive
+            
+            tilemap.push_back(door);
+            posx += Tilesize.x;
+        }
+    }
+    return tilemap;
+}
 
 };
 

@@ -26,8 +26,8 @@ DataLoader dl;
     vector<Sprite> bottom;
     //Goal g = Goal( {18*32, 24*32}, 1); 
     vector<Goal> goals;
-    Door door = Door("Textures/slidedoor1.png", true, {18*32, 18*32});
-    vector<Door> doors = {door};
+   // Door door = Door(1, true, {18*32, 18*32});
+    vector<Door> doors;// = {door};
      PushButton p = PushButton("Textures/PushButton.png", {14*32, 10*32}, true);
     vector<PushButton> buttons = {p};
     vector<Teleporter> teleporters;
@@ -67,11 +67,15 @@ void Level2::Code(sf::RenderWindow& window){
     walls = tmpimp.TilemapWalls();
     ais = tmpimp.AIs(); 
     goals = tmpimp.Goals();
+    doors = tmpimp.Doors();
     for(auto& a : ais){
       a.settexture();
     }
     for(auto& g : goals){
       g.SetTexture();
+    }
+    for(auto& d : doors){
+      d.settexture();
     }
       camera.setSize(Vector2f(window.getSize()));
     camera.setCenter(window.getSize().x / 2, window.getSize().y / 2);  
@@ -107,7 +111,7 @@ void Level2::Update(sf::RenderWindow &window)
     }
     
     for(auto& d : doors){
-         d.update(p.pressed, 15*32, 18*32);
+         d.update(p.pressed);
     }
       
       

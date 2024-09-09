@@ -31,7 +31,7 @@ private:
         AI ai = AI({200,200},2.5f, 32, 32, {4,3}, 0.2f, 0);
         TilemapImporter tilemapImporter = TilemapImporter("./Levels/level1.json", "Textures/tilemap1.png", {64*32, 64*32}, {32, 32}, {256, 256});
         Goal g = Goal( {57, 1000}, 0);
-        Door door = Door("Textures/3.png", false, {100, 4});
+        Door door = Door(1, false, {100, 4});
         vector<Door> doors = {door};
         PushButton p = PushButton("Textures/3.png", {678, 5}, true);
        vector<AI> ais = {ai};

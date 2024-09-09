@@ -28,7 +28,7 @@ DataLoader dl;
     Goal g = Goal( {1*32, 13*32}, 5); 
     Goal g2 = Goal( {17*32, 25*32}, 4); 
     vector<Goal> goals = {g,g2};
-    Door door = Door("Textures/slidedoor1.png", true, {17*32, 23*32});
+    Door door = Door(1, true, {17*32, 23*32});
     
     vector<Door> doors = {door};
     
@@ -114,7 +114,7 @@ void Level4::Update(sf::RenderWindow &window)
       
       }
     
-       doors[0].update(p2.pressed, 15*32,17*32);
+       doors[0].update(p2.pressed);
       
       
       
@@ -191,7 +191,7 @@ void Level4::Render(sf::RenderWindow &window)
    
      sel.Draw(window);
       for (Goal& goal : goals){
-    if(goal.finishedpattern){
+    if(goal.finishedpattern == true){
         nextlevel.Draw(window);
       }}
      

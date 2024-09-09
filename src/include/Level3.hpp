@@ -27,9 +27,9 @@ DataLoader dl;
     vector<Sprite> bottom;
   //  Goal g = Goal({19*32, 24*32}, 3); 
     vector<Goal> goals;
-    Door door = Door("Textures/slidedoor1.png", true, {19*32, 14*32});
-    Door door2 = Door("Textures/slidedoor1.png", true, {19*32, 18*32});
-    vector<Door> doors = {door, door2};
+  //  Door door = Door(1, true, {19*32, 14*32});
+    //Door door2 = Door(1, true, {19*32, 18*32});
+    vector<Door> doors;
     
      
      PushButton p2 = PushButton("Textures/PushButton.png", {20*32, 4*32}, false);
@@ -74,6 +74,7 @@ void Level3::Code(sf::RenderWindow& window){
     goals = tmpimp.Goals();
     items = tmpimp.PushableItems();
     ais = tmpimp.AIs();
+    doors = tmpimp.Doors();
     for(auto& a : ais){
       a.settexture();
     }
@@ -82,6 +83,9 @@ void Level3::Code(sf::RenderWindow& window){
     }
     for(auto& pi : items){
       pi.SetTexture();
+    }
+    for(auto& d : doors){
+      d.settexture();
     }
       camera.setSize(Vector2f(window.getSize()));
     camera.setCenter(window.getSize().x / 2, window.getSize().y / 2);  
@@ -115,9 +119,11 @@ void Level3::Update(sf::RenderWindow &window)
       }
     }
     
-    
-       doors[0].update(p2.pressed, 15*32, 14*32);
-       doors[1].update(p2.pressed, 15*32, 18*32);
+    for(auto& d : doors){
+       d.update(p2.pressed);
+      
+    }
+      
       
       
      for(auto& i : items){
